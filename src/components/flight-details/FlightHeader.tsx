@@ -20,7 +20,7 @@ export function FlightHeader({ flight }: { flight: IFlight }) {
           searchParams.delete(QUERY_PARAM_FLIGHT);
           setSearchParams(searchParams);
         }}
-        className="text-gray-400 hover:text-white transition-colors bg-neutral-800 p-1 rounded-full cursor-pointer"
+        className="text-gray-400 hover:text-white transition-colors bg-neutral-800 p-1 rounded-full"
       >
         <X animateOnHover animateOnTap size={24} />
       </button>

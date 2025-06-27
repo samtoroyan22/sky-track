@@ -26,7 +26,7 @@ export function FlightCard({ flight }: Props) {
             [QUERY_PARAM_FLIGHT]: flight.id,
           });
         }}
-        className="bg-neutral-900 rounded-lg p-5 block w-full h-full cursor-pointer"
+        className="bg-neutral-900 rounded-lg p-5 block w-full h-full"
       >
         <div className="flex justify-between items-center mb-7">
           <div className="flex items-center gap-4">
