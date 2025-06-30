@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router";
 import type { IFlight } from "../../types/flight.types";
 import { QUERY_PARAM_FLIGHT } from "./flights.constants";
-import { cn } from "../../utils/cn";
+import { cn } from "@/lib/utils";
 
 interface Props {
   flight: IFlight;
