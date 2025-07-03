@@ -16,7 +16,7 @@ export function Header() {
     >
       <div className="flex items-center gap-6 sm:gap-3">
         <img
-          src="/logo.png"
+          src="/logo.svg"
           alt="Sky Track logo"
           className="w-12 h-12 sm:w-10 sm:h-10"
         />
@@ -36,7 +36,7 @@ export function Header() {
       <div className="flex items-center gap-2 sm:gap-1">
         <Link to="/favorites">
           <Heart
-            // animateOnHover
+            animateOnHover
             size={45}
             className="p-2 rounded-full bg-card hover:bg-neutral-700 transition-colors
         flex items-center justify-center"
