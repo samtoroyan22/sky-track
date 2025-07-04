@@ -12,7 +12,7 @@ export function FlightHeader({ flight }: { flight: IFlight }) {
     absolute top-3.5 left-1/2 -translate-x-1/2 w-11/12 rounded-xl h-max"
     >
       <div>
-        <h2 className="text-amber-400 text-xl font-medium">{flight.id}</h2>
+        <h2 className="text-sky-400 text-xl font-medium">{flight.id}</h2>
         <p className="text-gray-300 text-sm">{flight.airline.name}</p>
       </div>
       <button

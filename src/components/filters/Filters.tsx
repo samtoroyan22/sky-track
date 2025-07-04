@@ -24,7 +24,7 @@ export function Filters({ fromCountry, setFromCountry }: Props) {
 
       <DropdownMenu.Content
         sideOffset={8}
-        className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl p-2 min-w-[180px] shadow-md dark:shadow-lg animate-in fade-in slide-in-from-top-1"
+        className="z-10 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl p-2 min-w-[180px] shadow-md dark:shadow-lg animate-in fade-in slide-in-from-top-1"
       >
         {fromCountry && (
           <>

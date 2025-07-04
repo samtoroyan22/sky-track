@@ -33,14 +33,14 @@ const favoritesSlice = createSlice({
       saveFavoritesToLocalStorage(updated);
       return updated;
     },
-    clearFavorite: () => {
+    clearFavorites: () => {
       localStorage.removeItem(LS_KEY);
       return [];
     },
   },
 });
 
-export const { addFavorite, removeFavorite, clearFavorite } =
+export const { addFavorite, removeFavorite, clearFavorites } =
   favoritesSlice.actions;
 
 export const favoritesReducer = favoritesSlice.reducer;

@@ -21,7 +21,7 @@ export function FlightRoute({ flight }: { flight: IFlight }) {
       bg-neutral-950 rounded-full w-12 h-12 absolute 
         top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
       >
-        <Plane className="text-amber-400" size={22} />
+        <Plane className="text-sky-400" size={22} />
       </div>
 
       <div className="bg-card px-element py-element rounded-tr-xl text-center">

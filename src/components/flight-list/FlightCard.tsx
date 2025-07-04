@@ -3,6 +3,7 @@ import type { IFlight } from "../../types/flight.types";
 import { QUERY_PARAM_FLIGHT } from "./flights.constants";
 import { cn } from "@/lib/utils";
 import { FlightCardActions } from "./actions/FlightCardActions";
+import { ProgressBar } from "../custom-ui/ProgressBar";
 
 interface Props {
   flight: IFlight;
@@ -47,12 +48,14 @@ export function FlightCard({ flight }: Props) {
             </span>
           </div>
         </div>
-        <div className="flex justify-between items-center">
+        <div className="grid grid-cols-[1fr_5fr_1fr] items-end gap-4">
           <div className="space-y-0.5 text-left">
             <div>{flight.from.city}</div>
             <div className="font-semibold text-3xl">{flight.from.code}</div>
           </div>
-          <div>{/* PROGRESS BAR */}</div>
+          <div className="mb-4">
+            <ProgressBar persentage={flight.progress} />
+          </div>
           <div>
             <div>{flight.to.city}</div>
             <div className="font-semibold text-3xl">{flight.to.code}</div>

@@ -32,6 +32,7 @@ export const FLIGHTS: IFlight[] = [
       speed: 870,
       altitude: 10600,
     },
+    progress: 75,
   },
   {
     logo: "/logos/ryanair.svg",
@@ -64,6 +65,7 @@ export const FLIGHTS: IFlight[] = [
       speed: 840,
       altitude: 11200,
     },
+    progress: 95,
   },
   {
     logo: "/logos/s7.svg",
@@ -96,6 +98,7 @@ export const FLIGHTS: IFlight[] = [
       speed: 860,
       altitude: 10900,
     },
+    progress: 10,
   },
   {
     logo: "/logos/swiss.svg",
@@ -128,6 +131,7 @@ export const FLIGHTS: IFlight[] = [
       speed: 830,
       altitude: 10700,
     },
+    progress: 55,
   },
   {
     logo: "/logos/lufthansa.svg",
@@ -160,5 +164,6 @@ export const FLIGHTS: IFlight[] = [
       speed: 890,
       altitude: 11300,
     },
+    progress: 25,
   },
 ];
