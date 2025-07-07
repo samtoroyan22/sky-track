@@ -1,10 +1,24 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Filters } from "../filters/Filters";
 import { FlightCard } from "./FlightCard";
 import { FLIGHTS } from "./flights.data";
 
+import "react-loading-skeleton/dist/skeleton.css";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+
 export function FlightList() {
+  const [isLoading, setIsLoading] = useState(true);
   const [fromCountry, setFromCountry] = useState<string | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   const filteredFlights = useMemo(() => {
     if (!fromCountry) return FLIGHTS;
@@ -15,9 +29,22 @@ export function FlightList() {
     <div className="w-sm">
       <Filters fromCountry={fromCountry} setFromCountry={setFromCountry} />
       <div className="w-sm space-y-3">
-        {filteredFlights.map((flight) => (
-          <FlightCard key={flight.id} flight={flight} />
-        ))}
+        {isLoading ? (
+          <SkeletonTheme
+            baseColor="#202020"
+            highlightColor="#444"
+            borderRadius="0.7rem"
+            width={380}
+            height={170}
+          >
+            <Skeleton count={5} className="mb-3 p-0.5" />
+          </SkeletonTheme>
+        ) : (
+          !!filteredFlights.length &&
+          filteredFlights.map((flight) => (
+            <FlightCard key={flight.id} flight={flight} />
+          ))
+        )}
       </div>
     </div>
   );

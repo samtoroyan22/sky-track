@@ -36,7 +36,6 @@ export function Header() {
       <div className="flex items-center gap-2 sm:gap-1">
         <Link to="/favorites">
           <Heart
-            animateOnHover
             size={45}
             className="p-2 rounded-full bg-card hover:bg-neutral-700 transition-colors
         flex items-center justify-center"

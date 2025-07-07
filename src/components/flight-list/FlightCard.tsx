@@ -13,10 +13,11 @@ export function FlightCard({ flight }: Props) {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedFlight = searchParams.get(QUERY_PARAM_FLIGHT);
   const isActive = selectedFlight === flight.id;
+
   return (
     <div
       className={cn(
-        "relative rounded-lg p-0.5 w-full transition-colors ease-in group",
+        "relative rounded-lg p-0.5 w-full transition-colors ease-in group animate-fadeIn",
         isActive
           ? "bg-gradient-to-r from-sky-800 to-cyan-600"
           : "bg-transparent"
