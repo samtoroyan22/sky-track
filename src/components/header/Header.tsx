@@ -11,10 +11,10 @@ export function Header() {
   return (
     <div
       className="absolute top-7 left-1/2 -translate-x-1/2 flex items-center justify-between
-                 w-1/2 rounded-xl bg-card p-mini-element px-5 sm:px-mini-element lg:w-full lg:top-0 lg:relative lg:mb-5
-                 sm:rounded-lg"
+                 w-1/2 rounded-xl bg-card p-mini-element px-5 sm:px-mini-element 2xl:w-full 2xl:top-0 2xl:relative 2xl:mb-5
+                 sm:rounded-lg xs:flex-col xs:pb-4"
     >
-      <div className="flex items-center gap-6 sm:gap-3">
+      <div className="flex items-center gap-6 sm:gap-3 xs:flex-wrap xs:justify-center xs:mb-3">
         <img
           src="/logo.svg"
           alt="Sky Track logo"

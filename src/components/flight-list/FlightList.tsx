@@ -26,9 +26,9 @@ export function FlightList() {
   }, [fromCountry]);
 
   return (
-    <div className="w-sm">
+    <div className="w-sm xs:w-full xs:px-0 md:w-xs">
       <Filters fromCountry={fromCountry} setFromCountry={setFromCountry} />
-      <div className="w-sm space-y-3">
+      <div className="w-sm space-y-3 xs:w-full md:w-xs">
         {isLoading ? (
           <SkeletonTheme
             baseColor="#202020"

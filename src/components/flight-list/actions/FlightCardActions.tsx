@@ -25,9 +25,13 @@ export function FlightCardActions({ flightId }: Props) {
 
   return (
     <div
-      className="flex flex-col gap-2 absolute top-[40%] right-1 z-50 
-                origin-top-right scale-0 px-3 opacity-0 transition-all duration-300 
-                group-hover:-right-14 group-hover:scale-100 group-hover:opacity-100"
+      className={cn(
+        "flex flex-col gap-2 absolute z-50 transition-all duration-300",
+        // Desktop styles
+        "top-[40%] right-1 origin-top-left scale-0 opacity-0 group-hover:-right-14 group-hover:scale-100 group-hover:opacity-100",
+        // XS (mobile) styles
+        "xs:static xs:scale-100 xs:opacity-100 xs:flex-row xs:justify-end xs:mt-2"
+      )}
     >
       <Button onClick={handleToggleFavorites} variant="ghost" size="icon">
         <Heart

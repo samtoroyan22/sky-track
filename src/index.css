@@ -50,6 +50,10 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+html {
+  @apply xs:text-sm text-base md:text-[0.94rem];
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -68,7 +72,7 @@ body {
 @custom-variant lg (@media (max-width: 1200px));
 @custom-variant md (@media (max-width: 992px));
 @custom-variant sm (@media (max-width: 768px));
-@custom-variant xs (@media (max-width: 480px));
+@custom-variant xs (@media (max-width: 650px));
 @custom-variant xxs (@media (max-width: 360px));
 
 @theme inline {

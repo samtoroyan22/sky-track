@@ -4,11 +4,11 @@ import { Plane } from "lucide-react";
 export function FlightRoute({ flight }: { flight: IFlight }) {
   return (
     <div className="grid grid-cols-2 gap-1 mb-1 relative">
-      <div className="bg-card px-element py-element rounded-tl-xl text-center">
-        <h3 className="text-white text-4xl font-semibold mb-1.5">
+      <div className="bg-card p-element xs:p-4 rounded-tl-xl text-center">
+        <h3 className="text-white xs:text-3xl text-4xl font-semibold mb-1.5">
           {flight.from.code}
         </h3>
-        <p className="text-neutral-200 text-lg font-medium">
+        <p className="text-neutral-200 text-lg xs:text-base font-medium">
           {flight.from.city}
         </p>
         <p className="text-neutral-500 text-sm font-medium">
@@ -21,14 +21,16 @@ export function FlightRoute({ flight }: { flight: IFlight }) {
       bg-neutral-950 rounded-full w-12 h-12 absolute 
         top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
       >
-        <Plane className="text-sky-400" size={22} />
+        <Plane className="text-sky-400 xs:size-5" size={22} />
       </div>
 
-      <div className="bg-card px-element py-element rounded-tr-xl text-center">
-        <h3 className="text-white text-4xl font-semibold mb-1.5">
+      <div className="bg-card p-element xs:p-4 rounded-tr-xl text-center">
+        <h3 className="text-white xs:text-3xl text-4xl font-semibold mb-1.5">
           {flight.to.code}
         </h3>
-        <p className="text-neutral-200 text-lg font-medium">{flight.to.city}</p>
+        <p className="text-neutral-200 text-lg xs:text-base font-medium">
+          {flight.to.city}
+        </p>
         <p className="text-neutral-500 text-sm font-medium">
           {flight.to.timezone}
         </p>
