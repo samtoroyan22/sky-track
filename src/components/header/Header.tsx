@@ -11,7 +11,7 @@ export function Header() {
   return (
     <div
       className="absolute top-7 left-1/2 -translate-x-1/2 flex items-center justify-between
-                 w-1/2 rounded-xl bg-card p-mini-element px-5 sm:px-mini-element 2xl:w-full 2xl:top-0 2xl:relative 2xl:mb-5
+                 w-1/2 rounded-lg bg-card p-5 px-5 sm:px-mini-element 2xl:w-full 2xl:top-0 2xl:relative 2xl:mb-5
                  sm:rounded-lg xs:flex-col xs:pb-4"
     >
       <div className="flex items-center gap-6 sm:gap-3 xs:flex-wrap xs:justify-center xs:mb-3">
@@ -35,11 +35,7 @@ export function Header() {
 
       <div className="flex items-center gap-2 sm:gap-1">
         <Link to="/favorites">
-          <Heart
-            size={45}
-            className="p-2 rounded-full bg-card hover:bg-neutral-700 transition-colors
-        flex items-center justify-center"
-          />
+          <Heart className="p-2 rounded-full bg-card hover:bg-neutral-700 transition-colors flex items-center justify-center w-[43px] h-[43px] sm:w-[3px] sm:h-[33px]" />
         </Link>
         <ThemeToggle />
       </div>

@@ -1,13 +1,17 @@
-import type { ReactNode } from "react";
+import { GradientText } from "../animate-ui/text/gradient";
 
 interface Props {
-  children: ReactNode;
+  children: string;
 }
 
 export function Heading({ children }: Props) {
+  const text = children;
   return (
-    <h1 className="text-center text-5xl sm:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-500 to-blue-600 animate-in fade-in zoom-in-95 duration-700">
-      {children}
-    </h1>
+    <div>
+      <GradientText
+        className="text-5xl text-center sm:text-4xl font-extrabold animate-in fade-in slide-in-from-top-2 duration-800"
+        text={text}
+      />
+    </div>
   );
 }

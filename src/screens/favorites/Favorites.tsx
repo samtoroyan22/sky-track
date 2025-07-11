@@ -21,12 +21,11 @@ export function Favorites() {
     <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 py-8 relative z-0 min-h-screen">
       <div className="text-center mb-8">
         <Heading>Your Favorite Flights</Heading>
-        <div className="mx-auto mt-2 w-24 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full animate-in slide-in-from-left duration-500" />
       </div>
 
       <SubHeading>
-        Curate your dream journeys here. Explore your handpicked flights and
-        plan your next adventure.
+        Your journey starts here 🌍. Explore selected flights and plan
+        unforgettable trips ✈️.
       </SubHeading>
 
       {flights.length > 0 && (
@@ -38,10 +37,10 @@ export function Favorites() {
         >
           <button
             onClick={() => dispatch(clearFavorites())}
-            className="px-5 py-2 text-xs font-medium text-white bg-gradient-to-r from-rose-500 to-pink-500 rounded-full hover:from-rose-600 hover:to-pink-600 transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-1 focus:ring-offset-neutral-50 dark:focus:ring-offset-neutral-900 shadow-md"
+            className="px-5 py-2 text-xs font-medium text-white bg-gradient-to-r from-rose-500 to-pink-500 rounded-full hover:from-rose-600 hover:to-pink-600 transition-colors duration-300"
             aria-label="Clear all favorite flights"
           >
-            Clear Favorites
+            Clear
           </button>
         </motion.div>
       )}
