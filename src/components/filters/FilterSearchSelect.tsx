@@ -45,7 +45,7 @@ export function FilterSearchSelect({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between px-5 py-2.5 rounded-lg bg-white dark:bg-card text-card dark:text-white border-none"
+          className="w-full justify-between px-5 py-2.5 rounded-lg bg-card dark:bg-card text-neutral-900 dark:text-neutral-200 border-none"
         >
           {value
             ? data.find((item) => item.label === value)?.label

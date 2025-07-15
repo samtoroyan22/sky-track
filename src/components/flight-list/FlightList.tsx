@@ -12,14 +12,26 @@ export function FlightList() {
   const [isLoading, setIsLoading] = useState(true);
   const [fromCountry, setFromCountry] = useState<string | null>(null);
   const [currentAirline, setCurrentAirline] = useState<string | null>(null);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
 
+    const checkDarkMode = () => {
+      if (typeof window !== "undefined") {
+        setIsDark(document.documentElement.classList.contains("dark"));
+      }
+    };
+
+    checkDarkMode();
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, { attributes: true });
+
     return () => {
       clearTimeout(timer);
+      observer.disconnect();
     };
   }, []);
 
@@ -35,6 +47,9 @@ export function FlightList() {
     });
   }, [fromCountry, currentAirline]);
 
+  const baseColor = isDark ? "#202020" : "#ebebeb";
+  const highlightColor = isDark ? "#444" : "#fff";
+
   return (
     <div className="w-sm xs:w-full xs:px-0 md:w-xs">
       <Filters
@@ -43,11 +58,11 @@ export function FlightList() {
         currentAirline={currentAirline}
         setCurrentAirline={setCurrentAirline}
       />
-      <div className="space-y-4 w-sm xs:w-full xs:px-0 md:w-xs">
+      <div className="space-y-3 w-sm xs:w-full xs:px-0 md:w-xs">
         {isLoading ? (
           <SkeletonTheme
-            baseColor="#202020"
-            highlightColor="#444"
+            baseColor={baseColor}
+            highlightColor={highlightColor}
             borderRadius="0.7rem"
             height={170}
           >

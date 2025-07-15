@@ -6,7 +6,7 @@ interface Props {
 
 export function FlightStatus({ progress }: Props) {
   return (
-    <div className="bg-card p-mini-element mb-1">
+    <div className="bg-details p-mini-element mb-1">
       <div className="mt-3 mb-3.5">
         <ProgressBar persentage={progress} />
       </div>

@@ -8,21 +8,29 @@ export function FlightHeader({ flight }: { flight: IFlight }) {
 
   return (
     <div
-      className="bg-[#1a1a1a] rounded-t-xl px-6 py-4 flex items-center justify-between
+      className="bg-card rounded-t-xl px-6 py-4 flex items-center justify-between
     absolute top-3.5 left-1/2 -translate-x-1/2 w-11/12 rounded-xl h-max"
     >
       <div>
-        <h2 className="text-sky-400 text-xl font-medium">{flight.id}</h2>
-        <p className="text-gray-300 text-sm">{flight.airline.name}</p>
+        <h2 className="text-sky-500 dark:text-sky-400  text-xl font-medium">
+          {flight.id}
+        </h2>
+        <p className="text-gray-700 dark:text-gray-300 text-sm">
+          {flight.airline.name}
+        </p>
       </div>
       <button
         onClick={() => {
           searchParams.delete(QUERY_PARAM_FLIGHT);
           setSearchParams(searchParams);
         }}
-        className="text-gray-400 hover:text-white transition-colors bg-neutral-800 p-1 rounded-full"
       >
-        <X animateOnHover animateOnTap size={24} />
+        <X
+          animateOnHover
+          animateOnTap
+          size={30}
+          className="bg-neutral-300 dark:bg-neutral-800 -text-card transition-colors p-1 rounded-full"
+        />
       </button>
     </div>
   );

@@ -13,7 +13,7 @@ export function FlightActions({ onRoute, onFollow, onShare, onMore }: Props) {
       <div className="grid grid-cols-4 gap-1">
         <button
           onClick={onRoute}
-          className="flex flex-col items-center gap-2 bg-card p-mini-element 
+          className="flex flex-col items-center gap-2 bg-details p-mini-element 
           rounded-tl-2xl xs:rounded-tl-xl rounded-bl-2xl xs:rounded-bl-xl transition-colors hover:bg-neutral-800"
         >
           <Route size={22} className="xs:size-5" />
@@ -21,7 +21,7 @@ export function FlightActions({ onRoute, onFollow, onShare, onMore }: Props) {
         </button>
         <button
           onClick={onFollow}
-          className="flex flex-col items-center gap-2 bg-card px-mini-element
+          className="flex flex-col items-center gap-2 bg-details px-mini-element
           py-mini-element transition-colors hover:bg-neutral-800"
         >
           <MapPin size={22} className="xs:size-5" />
@@ -29,7 +29,7 @@ export function FlightActions({ onRoute, onFollow, onShare, onMore }: Props) {
         </button>
         <button
           onClick={onShare}
-          className="flex flex-col items-center gap-2 bg-card px-mini-element
+          className="flex flex-col items-center gap-2 bg-details px-mini-element
           py-mini-element transition-colors hover:bg-neutral-800"
         >
           <Share size={22} className="xs:size-5" />
@@ -37,7 +37,7 @@ export function FlightActions({ onRoute, onFollow, onShare, onMore }: Props) {
         </button>
         <button
           onClick={onMore}
-          className="flex flex-col items-center gap-2 bg-card px-mini-element
+          className="flex flex-col items-center gap-2 bg-details px-mini-element
           py-mini-element rounded-tr-2xl rounded-br-2xl transition-colors hover:bg-neutral-800"
         >
           <MoreHorizontal size={22} className="xs:size-5" />
