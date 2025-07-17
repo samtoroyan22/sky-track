@@ -1,7 +1,3 @@
-import { useSearchParams } from "react-router";
-import { QUERY_PARAM_FLIGHT } from "../flight-list/flights.constants";
-import { FLIGHTS } from "../flight-list/flights.data";
-import { useMemo } from "react";
 import { FlightHeader } from "./FlightHeader";
 import { FlightImage } from "./FlightImage";
 import { FlightInformation } from "./FlightInformation";
@@ -10,15 +6,10 @@ import { FlightStatus } from "./FlightStatus";
 import { FlightActions } from "./FlightActions";
 import { FlightSchedule } from "./FlightSchedule";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCurrentFlight } from "@/hooks/useCurrentFlight";
 
 export function FlightDetails() {
-  const [searchParams] = useSearchParams();
-  const selectedFlight = searchParams.get(QUERY_PARAM_FLIGHT);
-
-  const flight = useMemo(
-    () => FLIGHTS.find((flight) => flight.id === selectedFlight),
-    [selectedFlight]
-  );
+  const { flight } = useCurrentFlight();
 
   return (
     <AnimatePresence>

@@ -51,7 +51,7 @@ export function FlightList() {
   const highlightColor = isDark ? "#444" : "#fff";
 
   return (
-    <div className="w-sm xs:w-full xs:px-0 md:w-xs">
+    <div className="w-sm xs:w-full xs:px-0 md:w-xs relative z-10">
       <Filters
         fromCountry={fromCountry}
         setFromCountry={setFromCountry}
