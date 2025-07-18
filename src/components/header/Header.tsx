@@ -10,7 +10,7 @@ export function Header() {
 
   return (
     <div
-      className="absolute z-50 top-7 left-1/2 -translate-x-1/2 flex items-center justify-between
+      className="absolute z-50 top-7 left-1/2 -translate-x-1/2 flex items-center justify-between shadow-lg
                  w-1/2 rounded-lg bg-card p-5 px-5 sm:px-mini-element 2xl:w-full 2xl:top-0 2xl:relative 2xl:mb-5
                  sm:rounded-lg xs:flex-col xs:pb-4"
     >

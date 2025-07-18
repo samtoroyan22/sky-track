@@ -33,7 +33,7 @@ export function FlightCardActions({ flightId }: Props) {
         "xs:static xs:scale-100 xs:opacity-100 xs:flex-row xs:justify-end xs:mt-2"
       )}
     >
-      <Button onClick={handleToggleFavorites} variant="ghost" size="icon">
+      <Button onClick={handleToggleFavorites} variant="outline" size="icon">
         <Heart
           className={cn(
             "size-6 transition-colors",

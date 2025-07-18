@@ -21,7 +21,7 @@ export function FlightDetails() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="absolute top-7 right-7 w-sm rounded-lg overflow-hidden dark:bg-black bg-white z-50
+            className="absolute top-7 right-7 w-sm rounded-lg shadow-xl overflow-hidden dark:bg-black bg-white z-50
                        2xl:top-34 md:top-29.5 md:right-3 sm:top-27.5 
                        xs:top-38 xs:right-0 xs:w-full xs:h-full"
           >

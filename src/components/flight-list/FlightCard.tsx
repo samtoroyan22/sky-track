@@ -15,7 +15,7 @@ export function FlightCard({ flight }: Props) {
   const isActive = selectedFlight === flight.id;
 
   return (
-    <div className="flex flex-col gap-1 relative w-full transition-colors ease-in group animate-fadeIn">
+    <div className="flex flex-col gap-1 relative w-full shadow-xl transition-colors ease-in group animate-fadeIn">
       <FlightCardActions flightId={flight.id} />
       <div
         className={cn(
