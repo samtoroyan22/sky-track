@@ -4,81 +4,97 @@ import type { MapRef } from "react-map-gl/maplibre";
 import { useCurrentFlight } from "@/hooks/useCurrentFlight";
 import { useEffect, useMemo, useRef } from "react";
 import { Plane } from "lucide-react";
-import { FLIGHTS } from "../flight-list/flights.data";
 import {
   createSplitGreatCircle,
   dashedStyle,
   solidStyle,
 } from "./sky-track-map.utils";
 import { useTheme } from "@/providers/theme/useTheme";
+import type { IOpenskyState } from "@/services/opensky/opensky.types";
+import { getAirportCoordinatesByICAO } from "./get-airport-coordinates";
 
-export function SkyTrackMap() {
+interface Props {
+  flights: IOpenskyState[];
+}
+
+export function SkyTrackMap({ flights }: Props) {
   const { flight } = useCurrentFlight();
 
-  const currnetFlightCoordinates = useMemo(
-    () =>
-      FLIGHTS.filter((f) => f.id !== flight?.id).map(
-        (f) => f.currentLocation.coordinates
-      ),
-    [flight]
-  );
+  const currnetFlightCoordinates = useMemo(() => {
+    return flights
+      .filter((f) => f.icao24 !== flight?.flight.icao)
+      .filter((f) => f.latitude !== null && f.longitude !== null)
+      .map((f) => [f.latitude!, f.longitude!] as [number, number]);
+  }, [flights, flight]);
+
+  const flightAdditionalData = useMemo(() => {
+    return flights.find((f) => f.callsign === flight?.flight.icao);
+  }, [flight?.flight.icao, flights]);
 
   const ref = useRef<MapRef>(null);
 
   useEffect(() => {
-    if (ref.current && flight) {
+    if (
+      ref.current &&
+      flightAdditionalData &&
+      flightAdditionalData.latitude &&
+      flightAdditionalData.longitude
+    ) {
       ref.current.setCenter({
-        lat: flight.currentLocation.coordinates[0],
-        lng: flight.currentLocation.coordinates[1],
+        lat: flightAdditionalData.latitude,
+        lng: flightAdditionalData.longitude,
       });
       ref.current.setZoom(6);
     }
-  }, [flight]);
+  }, [flight, flightAdditionalData]);
+
+  const coordinatesDeparture = useMemo(
+    () => getAirportCoordinatesByICAO(flight?.departure.icao),
+    [flight?.departure.icao]
+  );
+
+  const coordinatesArrival = useMemo(
+    () => getAirportCoordinatesByICAO(flight?.arrival.icao),
+    [flight?.arrival.icao]
+  );
 
   const [solidCoords, dashedCoords] = useMemo(() => {
-    if (!flight?.from || !flight?.to || !flight.currentLocation)
+    if (!flightAdditionalData?.latitude || !flightAdditionalData?.longitude) {
       return [[], []];
+    }
 
     const all = [
-      [flight.from.coordinates[1], flight.from.coordinates[0]],
-      [
-        flight.currentLocation.coordinates[1],
-        flight.currentLocation.coordinates[0],
-      ],
-      [flight.to.coordinates[1], flight.to.coordinates[0]],
+      [coordinatesDeparture?.lon, coordinatesDeparture?.lat],
+      [flightAdditionalData.longitude, flightAdditionalData.latitude],
+      [coordinatesArrival?.lon, coordinatesArrival?.lat],
     ];
 
     return [all.slice(0, 2), all.slice(1)];
-  }, [flight]);
-  //   type: "FeatureCollection",
-  //   features: [
-  //     {
-  //       type: "Feature",
-  //       geometry: {
-  //         type: "LineString",
-  //         coordinates: solidCoords,
-  //       },
-  //       properties: {},
-  //     },
-  //   ],
-  // };
-
-  // const dashedGeoJson: GeoJSON.FeatureCollection = {
-  //   type: "FeatureCollection",
-  //   features: [
-  //     {
-  //       type: "Feature",
-  //       geometry: {
-  //         type: "LineString",
-  //         coordinates: dashedCoords,
-  //       },
-  //       properties: {},
-  //     },
-  //   ],
-  // };
+  }, [
+    coordinatesArrival?.lat,
+    coordinatesArrival?.lon,
+    coordinatesDeparture?.lat,
+    coordinatesDeparture?.lon,
+    flightAdditionalData?.latitude,
+    flightAdditionalData?.longitude,
+  ]);
 
   const { solidFeature, dashedFeature, snappedPoint, bearing } = useMemo(() => {
-    if (!flight?.from || !flight?.to || !flight?.currentLocation) {
+    if (
+      !flight?.arrival.icao ||
+      !flight?.departure.icao ||
+      !flightAdditionalData?.latitude ||
+      !flightAdditionalData?.longitude
+    ) {
+      return {
+        solidFeature: null,
+        dashedFeature: null,
+        snappedPoint: null,
+        bearing: 0,
+      };
+    }
+
+    if (coordinatesDeparture === null || coordinatesArrival === null) {
       return {
         solidFeature: null,
         dashedFeature: null,
@@ -88,25 +104,30 @@ export function SkyTrackMap() {
     }
 
     const from: [number, number] = [
-      flight.from.coordinates[1],
-      flight.from.coordinates[0],
+      coordinatesDeparture?.lon,
+      coordinatesDeparture?.lat,
     ];
 
     const to: [number, number] = [
-      flight.to.coordinates[1],
-      flight.to.coordinates[0],
+      coordinatesArrival?.lon,
+      coordinatesArrival?.lat,
     ];
 
     const current: [number, number] = [
-      flight.currentLocation.coordinates[1],
-      flight.currentLocation.coordinates[0],
+      flightAdditionalData.longitude,
+      flightAdditionalData.latitude,
     ];
 
     return createSplitGreatCircle(from, to, current);
-  }, [flight]);
+  }, [
+    flight?.arrival.icao,
+    flight?.departure.icao,
+    flightAdditionalData?.latitude,
+    flightAdditionalData?.longitude,
+  ]);
 
-  const initialLat = flight?.currentLocation?.coordinates?.[0] ?? 37.5;
-  const initialLng = flight?.currentLocation?.coordinates?.[1] ?? -122.5;
+  const initialLat = flightAdditionalData?.latitude ?? 37.5;
+  const initialLng = flightAdditionalData?.longitude ?? -122.5;
 
   const { theme } = useTheme();
 
@@ -170,18 +191,17 @@ export function SkyTrackMap() {
         </Marker>
       )}
 
-      {flight?.from?.coordinates?.length &&
-        flight.from.coordinates.length > 1 && (
-          <Marker
-            latitude={flight.from.coordinates[0]}
-            longitude={flight.from.coordinates[1]}
-          />
-        )}
-
-      {flight?.to?.coordinates?.length && flight.to.coordinates.length > 1 && (
+      {coordinatesDeparture && (
         <Marker
-          latitude={flight.to.coordinates[0]}
-          longitude={flight.to.coordinates[1]}
+          latitude={coordinatesDeparture.lat}
+          longitude={coordinatesDeparture.lon}
+        />
+      )}
+
+      {coordinatesArrival && (
+        <Marker
+          latitude={coordinatesArrival.lat}
+          longitude={coordinatesArrival.lon}
         />
       )}
 

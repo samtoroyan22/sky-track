@@ -1,18 +1,32 @@
-import type { IFlight } from "../../types/flight.types";
-import { Plane } from "lucide-react";
+import type { IFlightData } from "@/services/aviation/aviation.types";
 
-export function FlightRoute({ flight }: { flight: IFlight }) {
+import { Plane } from "lucide-react";
+import { useMemo } from "react";
+import { getAirportAdditionalData } from "../map/get-airport-coordinates";
+import { getUtcOffsetFromTimezone } from "./getAirportUtc";
+
+export function FlightRoute({ flight }: { flight: IFlightData }) {
+  const departureAirport = useMemo(
+    () => getAirportAdditionalData(flight.departure.icao),
+    [flight.departure.icao]
+  );
+
+  const arrivalAirport = useMemo(
+    () => getAirportAdditionalData(flight.arrival.icao),
+    [flight.arrival.icao]
+  );
+
   return (
     <div className="grid grid-cols-2 gap-1 mb-1 relative">
       <div className="bg-details p-element xs:p-4 rounded-tl-xl text-center">
         <h3 className="-text-card xs:text-3xl text-4xl font-semibold mb-1.5">
-          {flight.from.code}
+          {flight.departure.iata}
         </h3>
         <p className="-text-card text-lg xs:text-base font-medium">
-          {flight.from.city}
+          {departureAirport?.municipality}
         </p>
         <p className="text-neutral-500 text-sm font-medium">
-          {flight.from.timezone}
+          {getUtcOffsetFromTimezone(flight.departure.timezone)}
         </p>
       </div>
 
@@ -26,13 +40,13 @@ export function FlightRoute({ flight }: { flight: IFlight }) {
 
       <div className="bg-details p-element xs:p-4 rounded-tr-xl text-center">
         <h3 className="-text-card xs:text-3xl text-4xl font-semibold mb-1.5">
-          {flight.to.code}
+          {flight.arrival.iata}
         </h3>
         <p className="-text-card text-lg xs:text-base font-medium">
-          {flight.to.city}
+          {arrivalAirport?.municipality}
         </p>
         <p className="text-neutral-500 text-sm font-medium">
-          {flight.to.timezone}
+          {getUtcOffsetFromTimezone(flight.arrival.timezone)}
         </p>
       </div>
     </div>

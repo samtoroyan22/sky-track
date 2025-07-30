@@ -9,22 +9,27 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { Favorites } from "./screens/favorites/Favorites";
 import { CenterLayout } from "./components/CenterLayout";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider>
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Home />} />
-              <Route element={<CenterLayout />}>
-                <Route path="/favorites" element={<Favorites />} />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Home />} />
+                <Route element={<CenterLayout />}>
+                  <Route path="/favorites" element={<Favorites />} />
+                </Route>
               </Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </Provider>
-    </ThemeProvider>
+            </Routes>
+          </BrowserRouter>
+        </Provider>
+      </ThemeProvider>
+    </QueryClientProvider>
   </StrictMode>
 );

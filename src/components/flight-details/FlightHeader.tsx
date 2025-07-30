@@ -1,9 +1,9 @@
-import type { IFlight } from "@/types/flight.types";
 import { X } from "../animate-ui/icons/x";
 import { useSearchParams } from "react-router";
 import { QUERY_PARAM_FLIGHT } from "../flight-list/flights.constants";
+import type { IFlightData } from "@/services/aviation/aviation.types";
 
-export function FlightHeader({ flight }: { flight: IFlight }) {
+export function FlightHeader({ flight }: { flight: IFlightData }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
@@ -13,7 +13,7 @@ export function FlightHeader({ flight }: { flight: IFlight }) {
     >
       <div>
         <h2 className="text-sky-500 dark:text-sky-400  text-xl font-medium">
-          {flight.id}
+          {flight.flight.icao}
         </h2>
         <p className="text-gray-700 dark:text-gray-300 text-sm">
           {flight.airline.name}

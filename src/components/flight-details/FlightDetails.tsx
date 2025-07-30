@@ -16,7 +16,7 @@ export function FlightDetails() {
       {flight && (
         <>
           <motion.aside
-            key={flight.id}
+            key={flight.flight.icao}
             initial={{ x: "100%", opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
@@ -26,11 +26,11 @@ export function FlightDetails() {
                        xs:top-38 xs:right-0 xs:w-full xs:h-full"
           >
             <FlightHeader flight={flight} />
-            <FlightImage flight={flight} />
+            <FlightImage />
 
             <div className="p-3.5 overflow-y-auto max-h-full">
               <FlightRoute flight={flight} />
-              <FlightStatus progress={flight.progress} />
+              {/* <FlightStatus progress={flight.progress} /> */}
               <FlightSchedule />
               <FlightInformation flight={flight} />
               <FlightActions

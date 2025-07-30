@@ -1,6 +1,6 @@
-import type { IFlight } from "../../types/flight.types";
+import type { IFlightData } from "@/services/aviation/aviation.types";
 
-export function FlightInformation({ flight }: { flight: IFlight }) {
+export function FlightInformation({ flight }: { flight: IFlightData }) {
   return (
     <div className="my-3.5 text-sm sm:text-sm">
       <div className="font-medium mb-1 bg-details p-mini-element rounded-tl-xl rounded-tr-xl">
@@ -9,18 +9,18 @@ export function FlightInformation({ flight }: { flight: IFlight }) {
 
       <div className="grid grid-cols-2 gap-1 mb-1">
         <div className="bg-details p-mini-element flex items-center justify-between">
-          <p>{flight.airline.name}</p>
+          <p>Boing</p>
         </div>
         <div className="bg-details p-mini-element flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img
+            {/* <img
               src={`/flags/${flight?.airline.country.toLowerCase()}.svg`}
               alt={flight?.airline.country}
               width={24}
               height={18}
               className="inline-block mr-1"
-            />
-            <span>{flight?.airline.country}</span>
+            /> */}
+            {/* <span>{flight?.airline.country}</span> */}
           </div>
         </div>
       </div>

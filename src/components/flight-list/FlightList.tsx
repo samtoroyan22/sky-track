@@ -1,24 +1,43 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Filters } from "../filters/Filters";
 import { FlightCard } from "./FlightCard";
-import { FLIGHTS } from "./flights.data";
 
 import "react-loading-skeleton/dist/skeleton.css";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { Button } from "../ui/button";
+import { RefreshCw } from "../animate-ui/icons/refresh-cw";
+import { formatDate } from "./format-date";
+import { useFlightsInfor } from "@/hooks/useFlightInfo";
 
-export function FlightList() {
-  const [isLoading, setIsLoading] = useState(true);
+interface Props {
+  flightIcaos: string[];
+  isSuccess: boolean;
+}
+
+export function FlightList({ flightIcaos, isSuccess }: Props) {
   const [fromCountry, setFromCountry] = useState<string | null>(null);
   const [currentAirline, setCurrentAirline] = useState<string | null>(null);
   const [isDark, setIsDark] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+  const { data, refetch, isRefetching, isPending, lastUpdate } =
+    useFlightsInfor(
+      {
+        flightIcaos,
+        airline: currentAirline,
+        fromCountry,
+        limit: 15,
+        offset: 0,
+      },
+      isSuccess
+    );
 
+  useEffect(() => {
+    if (isSuccess) refetch();
+  }, [isSuccess, refetch]);
+
+  useEffect(() => {
     const checkDarkMode = () => {
       if (typeof window !== "undefined") {
         setIsDark(document.documentElement.classList.contains("dark"));
@@ -30,22 +49,9 @@ export function FlightList() {
     observer.observe(document.documentElement, { attributes: true });
 
     return () => {
-      clearTimeout(timer);
       observer.disconnect();
     };
   }, []);
-
-  const filteredFlights = useMemo(() => {
-    return FLIGHTS.filter((flight) => {
-      const matchesCountry = fromCountry
-        ? flight.from.country === fromCountry
-        : true;
-      const matchesAirline = currentAirline
-        ? flight.airline.name === currentAirline
-        : true;
-      return matchesCountry && matchesAirline;
-    });
-  }, [fromCountry, currentAirline]);
 
   const baseColor = isDark ? "#202020" : "#ebebeb";
   const highlightColor = isDark ? "#444" : "#fff";
@@ -58,8 +64,30 @@ export function FlightList() {
         currentAirline={currentAirline}
         setCurrentAirline={setCurrentAirline}
       />
-      <div className="space-y-3 w-sm xs:w-full xs:px-0 md:w-xs">
-        {isLoading ? (
+
+      <div className="flex items-center justify-start mb-4">
+        <Button
+          className="rounded-lg p-0 bg-card"
+          onClick={() => refetch()}
+          disabled={isRefetching}
+          variant="secondary"
+        >
+          <RefreshCw animateOnHover />
+        </Button>
+
+        {lastUpdate && (
+          <div className="mb-0.5 ml-4 text-xs italic opacity-60">
+            {isRefetching ? (
+              <>Updating...</>
+            ) : (
+              <>Last update: {formatDate(lastUpdate)}</>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-3 w-sm xs:w-full xs:px-0 md:w-xs]">
+        {isPending ? (
           <SkeletonTheme
             baseColor={baseColor}
             highlightColor={highlightColor}
@@ -69,9 +97,9 @@ export function FlightList() {
             <Skeleton count={5} className="mb-3 p-0.5" />
           </SkeletonTheme>
         ) : (
-          !!filteredFlights.length &&
-          filteredFlights.map((flight) => (
-            <FlightCard key={flight.id} flight={flight} />
+          !!data?.length &&
+          data.map((flight) => (
+            <FlightCard key={flight.flight.number} flight={flight} />
           ))
         )}
       </div>
