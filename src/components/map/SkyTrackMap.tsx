@@ -31,7 +31,7 @@ export function SkyTrackMap() {
         lat: flight.currentLocation.coordinates[0],
         lng: flight.currentLocation.coordinates[1],
       });
-      ref.current.setZoom(6);
+      ref.current.setZoom(4);
     }
   }, [flight]);
 
@@ -50,32 +50,6 @@ export function SkyTrackMap() {
 
     return [all.slice(0, 2), all.slice(1)];
   }, [flight]);
-  //   type: "FeatureCollection",
-  //   features: [
-  //     {
-  //       type: "Feature",
-  //       geometry: {
-  //         type: "LineString",
-  //         coordinates: solidCoords,
-  //       },
-  //       properties: {},
-  //     },
-  //   ],
-  // };
-
-  // const dashedGeoJson: GeoJSON.FeatureCollection = {
-  //   type: "FeatureCollection",
-  //   features: [
-  //     {
-  //       type: "Feature",
-  //       geometry: {
-  //         type: "LineString",
-  //         coordinates: dashedCoords,
-  //       },
-  //       properties: {},
-  //     },
-  //   ],
-  // };
 
   const { solidFeature, dashedFeature, snappedPoint, bearing } = useMemo(() => {
     if (!flight?.from || !flight?.to || !flight?.currentLocation) {
@@ -116,7 +90,7 @@ export function SkyTrackMap() {
       initialViewState={{
         latitude: initialLat,
         longitude: initialLng,
-        zoom: 6,
+        zoom: 3,
       }}
       style={{ width: "100%", height: "100%" }}
       mapStyle={

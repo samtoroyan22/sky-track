@@ -4,12 +4,12 @@ import { FlightList } from "../../components/flight-list/FlightList";
 
 function Home() {
   return (
-    <div>
-      <FlightList />
-      <FlightDetails />
-      <div className="absolute inset-0 z-0">
+    <div className="relative min-h-screen">
+      <div className="fixed inset-0 z-0">
         <SkyTrackMap />
       </div>
+      <FlightList />
+      <FlightDetails isFavorite={false} />
     </div>
   );
 }

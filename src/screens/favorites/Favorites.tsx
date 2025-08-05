@@ -6,7 +6,6 @@ import { Heart } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { clearFavorites } from "@/store/favorites/favorites.slice";
 import { Heading } from "@/components/custom-ui/Heading";
-import { SubHeading } from "@/components/custom-ui/SubHeading";
 import { motion } from "framer-motion";
 
 export function Favorites() {
@@ -20,13 +19,13 @@ export function Favorites() {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 py-8 relative z-0 min-h-screen">
       <div className="text-center mb-8">
-        <Heading>Your Favorite Flights</Heading>
+        <Heading>Your Favorite Flights </Heading>
       </div>
 
-      <SubHeading>
+      <p className="text-lg text-center sm:text-base text-neutral-600 dark:text-neutral-200 mb-10 leading-relaxed max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-800">
         Your journey starts here 🌍. Explore selected flights and plan
         unforgettable trips ✈️.
-      </SubHeading>
+      </p>
 
       {flights.length > 0 && (
         <motion.div
@@ -37,10 +36,10 @@ export function Favorites() {
         >
           <button
             onClick={() => dispatch(clearFavorites())}
-            className="px-5 py-2 text-xs font-medium text-white bg-gradient-to-r from-rose-500 to-pink-500 rounded-full hover:from-rose-600 hover:to-pink-600 transition-colors duration-300"
+            className="px-5 py-2 text-xs rounded-lg font-medium text-foreground bg-card hover:bg-red-400/70 dark:hover:bg-red-500/30 transition-colors duration-300"
             aria-label="Clear all favorite flights"
           >
-            Clear
+            Clear all
           </button>
         </motion.div>
       )}
@@ -57,11 +56,11 @@ export function Favorites() {
             <p className="text-lg font-medium text-neutral-700 dark:text-neutral-300">
               Your favorites list is empty
             </p>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-2 max-w-sm mx-auto">
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 max-w-sm mx-auto">
               Add flights to your favorites to see them here.
             </p>
             <a
-              href="/flights"
+              href="/"
               className="mt-4 inline-block px-5 py-2 text-xs font-medium text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-1 focus:ring-offset-neutral-50 dark:focus:ring-offset-neutral-900"
             >
               Explore Flights

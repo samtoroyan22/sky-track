@@ -45,7 +45,8 @@ export function FilterSearchSelect({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between px-5 py-2.5 rounded-lg shadow-xl  bg-card dark:bg-card text-neutral-900 dark:text-neutral-200 border-none"
+          className="w-full justify-between px-5 py-2.5 rounded-lg shadow-xl bg-card dark:bg-card text-neutral-900 dark:text-neutral-200 border-none"
+          style={{ transition: "none" }}
         >
           {value
             ? data.find((item) => item.label === value)?.label
@@ -53,7 +54,7 @@ export function FilterSearchSelect({
           <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent className="w-full p-0" style={{ transition: "none" }}>
         <Command>
           <CommandInput
             placeholder={`Search ${entityName}...`}

@@ -67,7 +67,7 @@ body {
   --breakpoint-*: initial;
 }
 
-@custom-variant 2xl (@media (max-width: 1650px));
+@custom-variant 2xl (@media (max-width: 1755px));
 @custom-variant xl (@media (max-width: 1399px));
 @custom-variant lg (@media (max-width: 1200px));
 @custom-variant md (@media (max-width: 992px));

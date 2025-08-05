@@ -1,37 +1,26 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTheme } from "@/providers/theme/useTheme";
 import { Filters } from "../filters/Filters";
 import { FlightCard } from "./FlightCard";
 import { FLIGHTS } from "./flights.data";
-
-import "react-loading-skeleton/dist/skeleton.css";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export function FlightList() {
   const [isLoading, setIsLoading] = useState(true);
   const [fromCountry, setFromCountry] = useState<string | null>(null);
   const [currentAirline, setCurrentAirline] = useState<string | null>(null);
-  const [isDark, setIsDark] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
 
-    const checkDarkMode = () => {
-      if (typeof window !== "undefined") {
-        setIsDark(document.documentElement.classList.contains("dark"));
-      }
-    };
-
-    checkDarkMode();
-    const observer = new MutationObserver(checkDarkMode);
-    observer.observe(document.documentElement, { attributes: true });
-
     return () => {
       clearTimeout(timer);
-      observer.disconnect();
     };
   }, []);
 
@@ -47,6 +36,7 @@ export function FlightList() {
     });
   }, [fromCountry, currentAirline]);
 
+  const isDark = theme === "dark";
   const baseColor = isDark ? "#202020" : "#ebebeb";
   const highlightColor = isDark ? "#444" : "#fff";
 
