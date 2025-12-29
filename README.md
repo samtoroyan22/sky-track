@@ -1,54 +1,167 @@
-# React + TypeScript + Vite
+# Sky Track - Flight Tracker App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a flight tracking application built with React and Vite. It allows users to view a list of flights, check detailed information about each flight, add favorites, switch between light and dark themes, filter flights, and visualize routes on a map. The app uses mock data initially and integrates with real APIs like Aviationstack or OpenSky Network for live flight data. Favorites and theme preferences are persisted using local storage.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Flight List**: Displays a list of flights with basic information (departure city, arrival city, flight number, airline).
+- **Flight Details**: Detailed view of a selected flight, including route, time, status, speed, altitude, and country.
+- **Favorites**: Users can add/remove flights to/from favorites and view them on a dedicated page.
+- **Theme Switching**: Supports light and dark themes, stored in local storage.
+- **Filtering**: Filter flights by departure point and airline.
+- **Map Integration**: Displays flight routes on a map using MapLibre GL, with markers for origin and destination.
+- **API Integration**: Fetches real-time flight data from APIs like Aviationstack or OpenSky Network.
+- **Loading and Error Handling**: Skeletons for loading states, error messages, and manual refresh.
+- **Responsive Design**: Adaptive layout for desktop and mobile devices, including adaptive flight list and details.
+- **Animations**: Smooth animations for detail appearance using Framer Motion.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React**: A JavaScript library for building user interfaces.
+- **Vite**: A fast build tool and development server for modern web projects.
+- **React Router**: For routing and navigation.
+- **Redux Toolkit and React Redux**: For state management.
+- **MapLibre GL and React Map GL**: For map rendering and route visualization.
+- **Tailwind CSS**: For styling and theme management, with plugins like autoprefixer and animate.
+- **Shadcn UI and Radix UI**: For accessible UI components (dialogs, popovers, dropdowns).
+- **Lucide React**: For icons.
+- **Framer Motion**: For animations.
+- **Turf.js**: For geospatial analysis.
+- **React Loading Skeleton**: For loading placeholders.
+- **Local Storage**: For persisting favorites, theme, and other states.
+- **TypeScript**: For type-safe development.
+- **ESLint**: For code linting.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Setup and Installation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Prerequisites
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To run this project, you need to have the following installed:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- Node.js
+- npm (Node package manager)
+
+### Steps
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/samtoroyan22/sky-track
+   cd sky-track
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open the application in your browser by navigating to `http://localhost:5173`.
+
+## Screenshots
+
+Design reference:
+![Main screen](./design.png)
+
+## Troubleshooting
+
+- If the map does not load, check dependencies for MapLibre GL and React Map GL.
+- If themes do not switch properly, verify local storage access and Tailwind CSS setup.
+- If API data is not fetching, ensure the selected API (Aviationstack/OpenSky) is configured correctly and test requests.
+- For adaptive issues, test on different screen sizes and check media queries.
+- If local storage data is not persisting, check for browser restrictions (e.g., private mode).
+
+## License
+
+This project is licensed under the MIT License.  
+Copyright (c) 2025 Samvel Toroyan
+
+# Sky Track - Приложение "Трекер Рейсов"
+
+Этот проект представляет собой приложение для отслеживания рейсов, построенное с использованием React и Vite. Оно позволяет пользователям просматривать список рейсов, проверять детальную информацию о каждом рейсе, добавлять в избранное, переключать между светлой и тёмной темами, фильтровать рейсы и визуализировать маршруты на карте. Приложение сначала использует мок-данные, а затем интегрируется с реальными API, такими как Aviationstack или OpenSky Network, для живых данных о рейсах. Избранное и предпочтения темы сохраняются в локальном хранилище.
+
+## Особенности
+
+- **Список рейсов**: Отображает список рейсов с базовой информацией (город вылета, город прилёта, номер рейса, авиакомпания).
+- **Детали рейса**: Детальный просмотр выбранного рейса, включая маршрут, время, статус, скорость, высоту и страну.
+- **Избранное**: Пользователи могут добавлять/удалять рейсы в/из избранного и просматривать их на отдельной странице.
+- **Переключение тем**: Поддерживает светлую и тёмную темы, хранящиеся в локальном хранилище.
+- **Фильтрация**: Фильтр рейсов по пункту вылета и авиакомпании.
+- **Интеграция карты**: Отображает маршруты рейсов на карте с использованием MapLibre GL, с маркерами для отправления и прибытия.
+- **Интеграция API**: Получает реальные данные о рейсах из API вроде Aviationstack или OpenSky Network.
+- **Обработка загрузки и ошибок**: Скелетоны для состояний загрузки, сообщения об ошибках и ручное обновление.
+- **Адаптивный дизайн**: Адаптивная вёрстка для десктопных и мобильных устройств, включая адаптивный список и детали.
+- **Анимации**: Плавные анимации для появления деталей с использованием Framer Motion.
+
+## Используемые технологии
+
+- **React**: Библиотека JavaScript для создания пользовательских интерфейсов.
+- **Vite**: Быстрый инструмент для сборки и разработки современных веб-проектов.
+- **React Router**: Для маршрутизации и навигации.
+- **Redux Toolkit и React Redux**: Для управления состоянием.
+- **MapLibre GL и React Map GL**: Для рендеринга карты и визуализации маршрутов.
+- **Tailwind CSS**: Для стилизации и управления темами, с плагинами вроде autoprefixer и animate.
+- **Shadcn UI и Radix UI**: Для доступных UI-компонентов (диалоги, поповеры, дропдауны).
+- **Lucide React**: Для иконок.
+- **Framer Motion**: Для анимаций.
+- **Turf.js**: Для геопространственного анализа.
+- **React Loading Skeleton**: Для плейсхолдеров загрузки.
+- **Local Storage**: Для сохранения избранного, темы и других состояний.
+- **TypeScript**: Для типобезопасной разработки.
+- **ESLint**: Для линтинга кода.
+
+## Установка и настройка
+
+### Требования
+
+Для запуска этого проекта необходимо установить:
+
+- Node.js
+- npm (менеджер пакетов для Node.js)
+
+### Шаги
+
+1. **Клонировать репозиторий**:
+
+   ```bash
+   git clone https://github.com/your-username/sky-track.git
+   cd sky-track
+   ```
+
+2. **Установить зависимости**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Запустить сервер для разработки**:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Откройте приложение в браузере, перейдя по адресу `http://localhost:5173`.
+
+## Скриншоты
+
+Ссылка на дизайн:
+![Главный экран](./design.png)
+
+## Решение проблем
+
+- Если карта не загружается, проверьте зависимости для MapLibre GL и React Map GL.
+- Если темы не переключаются правильно, убедитесь в доступе к local storage и настройке Tailwind CSS.
+- Если данные API не загружаются, убедитесь, что выбранный API (Aviationstack/OpenSky) настроен правильно, и протестируйте запросы.
+- Для проблем с адаптивностью протестируйте на разных размерах экранов и проверьте медиа-запросы.
+- Если данные локального хранилища не сохраняются, проверьте ограничения браузера (например, режим инкогнито).
+
+## Лицензия
+
+Этот проект лицензирован под лицензией MIT.  
+Copyright (c) 2025 Samvel Toroyan
